@@ -34,3 +34,27 @@
 - 4136 bekende mappen.
 - 0 onbekende mappen.
 
+## Commit 0003 – File Inventory Engine
+
+### Nieuw
+
+- FileClassifier toegevoegd.
+- MetadataEngine toegevoegd.
+- HashEngine toegevoegd.
+- FileInventory toegevoegd.
+- Dashboard uitgebreid met bestandsinventarisatie.
+- Eerste integratie tussen directory-, file-, metadata- en hashanalyse.
+
+### Praktijktest
+
+Tijdens de eerste scan van een volledige MediaWiki-installatie bleek dat een complete inventarisatie van alle bestanden niet binnen de standaard PHP-requestlimiet van 30 seconden past.
+
+### Ontwerpbeslissing
+
+De inventarisatie wordt vanaf Commit 0003a vervangen door een asynchrone batch-engine.
+
+### Resultaat
+
+- Fundament voor bestandsanalyse gereed.
+- Batcharchitectuur voorbereid.
+- SHA-256 gekozen als standaard integriteitshash.

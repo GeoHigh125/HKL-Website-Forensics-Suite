@@ -6,6 +6,7 @@ namespace HKL\Forensics\Services;
 
 use HKL\Forensics\Core\Classification\DirectoryClassifier;
 use HKL\Forensics\Modules\MediaWiki\MediaWikiDetector;
+use HKL\Forensics\Core\Inventory\FileInventory;
 
 final class ScanService
 {
@@ -13,10 +14,13 @@ final class ScanService
 
     private DirectoryClassifier $directoryClassifier;
 
+    private FileInventory $inventory;
+
     public function __construct()
     {
         $this->detector = new MediaWikiDetector();
         $this->directoryClassifier = new DirectoryClassifier();
+        $this->inventory = new FileInventory();
     }
 
     /**
@@ -49,6 +53,7 @@ final class ScanService
             'detection' => $detection,
             'directories' => $directories,
             'statistics' => $this->buildStatistics($directories),
+            'inventory' => $this->inventory->build($scanPath),
         ];
     }
 

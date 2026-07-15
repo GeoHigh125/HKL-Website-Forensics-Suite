@@ -20,13 +20,24 @@
 - [x] Directory-statistieken
 - [x] 100% directoryclassificatie
 
-## Commit 0003
+## Commit 0003 ✅
 
-- File Classifier
-- Hash Engine
-- Metadata Engine
-- Known File Engine
-- Bestandsdashboard
+- [x] FileClassifier
+- [x] MetadataEngine
+- [x] HashEngine
+- [x] FileInventory
+- [x] Dashboardintegratie
+
+## Commit 0003a 🚧
+
+Asynchronous Scan Engine
+
+- [ ] ScanController
+- [ ] BatchController
+- [ ] ProgressController
+- [ ] Router
+- [ ] JavaScript Progress Engine
+- [ ] Dashboard Progress Bar
 
 ## Commit 0004
 - Malware- en IOC-engine

@@ -486,6 +486,21 @@ if (
                         <?= e($unknownDirectoryCount) ?>
                     </div>
                 </div>
+
+                <?php
+
+                if (
+                    isset($scanResult['inventory'])
+                ) {
+
+                    $inventory = $scanResult['inventory'];
+
+                    require dirname(__DIR__)
+                        . '/resources/views/file_inventory.php';
+
+                }
+                ?>
+
             </div>
 
             <p>
