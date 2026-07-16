@@ -34,5 +34,31 @@ Hierdoor blijft de scanner schaalbaar voor zeer grote websites en wordt de stand
 
 De communicatie tussen gebruikersinterface en scan-engine verloopt volledig via een JSON API.
 
+## Tweefasige scanarchitectuur
 
+Een volledige scan bestaat vanaf Commit 0003b uit twee onafhankelijke fasen.
+
+### Fase 1 — Bestandsinventarisatie
+
+De scanner verzamelt per bestand:
+
+- relatief en absoluut pad;
+- directorycategorie;
+- bestandstype;
+- metadata;
+- SHA-256-hash.
+
+De inventaris wordt opgeslagen als `inventory.jsonl`.
+
+### Fase 2 — Risicoanalyse
+
+De risico-engine verwerkt de bestaande inventaris batchgewijs en opent alleen bestanden waarvoor inhoudsanalyse relevant is.
+
+De resultaten worden opgeslagen als:
+
+- `risk-progress.json`;
+- `findings.jsonl`;
+- `risk-summary.json`.
+
+Daardoor kan de risicoanalyse opnieuw worden uitgevoerd zonder de volledige bestandsinventaris opnieuw op te bouwen.
 

@@ -41,16 +41,32 @@
 - [x] JavaScript Scan Engine
 - [x] Dashboard Progress
 
-## Commit 0003b
+## Commit 0003b — Gereed ✅
 
 ### MediaWiki IOC Detection Engine
 
-- [ ] Risk Scanner
-- [ ] IOC Scanner
-- [ ] PHP Pattern Scanner
-- [ ] Suspicious File Detector
-- [ ] Obfuscation Detector
-- [ ] Risk Dashboard
+- [x] MediaWikiRiskScanner
+- [x] BatchMediaWikiRiskScanner
+- [x] RiskController
+- [x] Risk API-endpoints
+- [x] JavaScript Risk Engine
+- [x] Automatische start na inventarisatie
+- [x] Live risicotellingen
+- [x] Bevindingenoverzicht
+- [x] Eerste volledige praktijktest
+
+## Commit 0003c — Gepland
+
+### Precision Detection Engine
+
+- [ ] Contextgevoelige PHP-detectie
+- [ ] Veilige domeinenlijst
+- [ ] Locatieafhankelijke bestandsnaamcontrole
+- [ ] MediaWiki core-, vendor- en maintenance-context
+- [ ] Betere webshellherkenning
+- [ ] Confidence- en scoremodel
+- [ ] False-positive-reductie
+- [ ] Nieuwe praktijktest
 
 
 ## Commit 0004

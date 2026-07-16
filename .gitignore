@@ -7,11 +7,20 @@
 /storage/reports/*
 !/storage/reports/.gitkeep
 
-# Scanresultaten
-storage/scans/
+# Tijdelijke scanresultaten
+storage/scans/*
 
-# Eventuele exports
-storage/reports/
+# Bewaar de map zelf
+!storage/scans/.gitkeep
 
-# Tijdelijke bestanden
-storage/tmp/
+storage/reports/*
+!storage/reports/.gitkeep
+
+storage/cache/*
+!storage/cache/.gitkeep
+
+storage/tmp/*
+!storage/tmp/.gitkeep
+
+storage/logs/*
+!storage/logs/.gitkeep

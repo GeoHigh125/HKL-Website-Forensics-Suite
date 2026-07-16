@@ -6,6 +6,7 @@ namespace HKL\Forensics\Http;
 
 use HKL\Forensics\Http\Controllers\BatchController;
 use HKL\Forensics\Http\Controllers\ProgressController;
+use HKL\Forensics\Http\Controllers\RiskController;
 use HKL\Forensics\Http\Controllers\ScanController;
 use RuntimeException;
 
@@ -38,6 +39,30 @@ final class ApiRouter
                 => (new ProgressController())->show(
                     (string) ($request['scan_id'] ?? '')
                 ),
+
+                        '/api/risk/start'
+                => (new RiskController())->start(
+                    (string) ($request['scan_id'] ?? '')
+                ),
+
+            '/api/risk/batch'
+                => (new RiskController())->process(
+                    (string) ($request['scan_id'] ?? ''),
+                    (int) ($request['batch_size'] ?? 250)
+                ),
+
+            '/api/risk/progress'
+                => (new RiskController())->progress(
+                    (string) ($request['scan_id'] ?? '')
+                ),
+
+            '/api/risk/findings'
+                => (new RiskController())->findings(
+                    (string) ($request['scan_id'] ?? ''),
+                    isset($request['severity'])
+                        ? (string) $request['severity']
+                        : null
+                ),    
 
             default
                 => throw new RuntimeException(

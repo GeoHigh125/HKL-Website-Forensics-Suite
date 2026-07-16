@@ -289,6 +289,31 @@ if (
             border-color: #ef9991;
         }
 
+        .severity-critical {
+
+            background: #ffdddd;
+
+        }
+
+        .severity-high {
+
+            background: #ffe9c9;
+
+        }
+
+        .severity-medium {
+
+            background: #fff7d1;
+
+        }
+
+        .severity-low {
+
+            background: #eef8ee;
+
+}
+
+
         .category-grid {
             display: grid;
             grid-template-columns:
@@ -396,8 +421,14 @@ if (
 
         .scan-completed #scan-progress-label {
             color: #ffffff;
-}
 
+        .dashboard-divider {
+            margin: 40px 0;
+            border: 0;
+            border-top: 1px solid #d8d8d8;
+        }
+
+    }
 
     </style>
 </head>
@@ -699,9 +730,105 @@ if (
             <?php endif; ?>
         </section>
     <?php endif; ?>
-</main>
 
+    <hr class="dashboard-divider">
+
+    <section
+        id="risk-dashboard"
+        class="card"
+    >
+        <h2>Risicoanalyse</h2>
+
+        <p>
+            Status:
+            <strong id="risk-status">
+                Niet gestart
+            </strong>
+        </p>
+
+        <p>
+            Fase:
+            <strong id="risk-phase">
+                -
+            </strong>
+        </p>
+
+        <p>
+            Bestanden:
+            <strong id="risk-files">
+                0 / 0
+            </strong>
+        </p>
+
+        <p>
+            Huidig bestand:
+            <strong id="risk-current">
+                -
+            </strong>
+        </p>
+
+        <p>
+            Voortgang:
+            <strong id="risk-percent">
+                0 %
+            </strong>
+        </p>
+
+        <div class="progress-track">
+            <div
+                id="risk-progress-bar"
+                class="progress-bar"
+            ></div>
+
+            <div id="risk-progress-label">
+                0 %
+            </div>
+        </div>
+
+        <h3>Risicotelling</h3>
+
+        <table>
+            <tbody>
+            <tr>
+                <td>Kritiek</td>
+                <td id="risk-critical">0</td>
+            </tr>
+
+            <tr>
+                <td>Hoog</td>
+                <td id="risk-high">0</td>
+            </tr>
+
+            <tr>
+                <td>Middel</td>
+                <td id="risk-medium">0</td>
+            </tr>
+
+            <tr>
+                <td>Laag</td>
+                <td id="risk-low">0</td>
+            </tr>
+
+            <tr>
+                <th>Totaal</th>
+                <th id="risk-total">0</th>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Gevonden risico’s</h2>
+
+        <div id="risk-findings">
+            <p>Nog geen risicoanalyse uitgevoerd.</p>
+        </div>
+    </section>
+
+</main>  
     <script src="/assets/js/scan-engine.js"></script>
+
+    <script src="/assets/js/risk-engine.js"></script>
 
     <script src="/assets/js/scan-dashboard.js"></script>
 
@@ -711,6 +838,51 @@ if (
         new HKLScanDashboard(
             'scan-dashboard'
         );
+
+    const riskScanner =
+        new HKLRiskEngine({
+
+            apiUrl: '/api.php',
+
+            batchSize: 250,
+
+            onStarted(progress) {
+
+                dashboard.updateRisk(
+                    progress
+                );
+
+            },
+
+            onProgress(progress) {
+
+                dashboard.updateRisk(
+                    progress
+                );
+
+            },
+
+            onCompleted(
+                progress,
+                findings
+            ) {
+
+                dashboard.completedRisk(
+                    progress,
+                    findings
+                );
+
+            },
+
+            onError(message) {
+
+                dashboard.riskError(
+                    message
+                );
+
+            }
+
+        });
 
     const scanner =
         new HKLScanEngine({
@@ -741,7 +913,11 @@ if (
                     progress
                 );
 
-            },
+                riskScanner.start(
+                    scanner.scanId
+                );
+
+            },    
 
             onError(error) {
 
@@ -774,5 +950,5 @@ if (
 
     </script>
 
-</body>
+    </body>
 </html>
