@@ -6,3 +6,12 @@
 !/storage/logs/.gitkeep
 /storage/reports/*
 !/storage/reports/.gitkeep
+
+# Scanresultaten
+storage/scans/
+
+# Eventuele exports
+storage/reports/
+
+# Tijdelijke bestanden
+storage/tmp/
