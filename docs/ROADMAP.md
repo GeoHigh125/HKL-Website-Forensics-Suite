@@ -28,16 +28,30 @@
 - [x] FileInventory
 - [x] Dashboardintegratie
 
-## Commit 0003a 🚧
+## Commit 0003a ✅
 
-Asynchronous Scan Engine
+### Asynchronous Scan Engine
 
-- [ ] ScanController
-- [ ] BatchController
-- [ ] ProgressController
-- [ ] Router
-- [ ] JavaScript Progress Engine
-- [ ] Dashboard Progress Bar
+- [x] Batch File Inventory
+- [x] ScanController
+- [x] BatchController
+- [x] ProgressController
+- [x] ApiRouter
+- [x] JSON API
+- [x] JavaScript Scan Engine
+- [x] Dashboard Progress
+
+## Commit 0003b
+
+### MediaWiki IOC Detection Engine
+
+- [ ] Risk Scanner
+- [ ] IOC Scanner
+- [ ] PHP Pattern Scanner
+- [ ] Suspicious File Detector
+- [ ] Obfuscation Detector
+- [ ] Risk Dashboard
+
 
 ## Commit 0004
 - Malware- en IOC-engine

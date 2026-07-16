@@ -226,7 +226,10 @@ final class BatchFileInventory
         if ($processed >= $totalFiles) {
             $progress['status'] = 'completed';
             $progress['phase'] = 'completed';
-            $progress['current_file'] = null;
+
+            $progress['last_file'] =
+                $progress['current_file'] ?? null;
+
             $progress['percentage'] = 100;
             $progress['completed_at'] = date(DATE_ATOM);
         }

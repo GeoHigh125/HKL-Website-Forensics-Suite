@@ -20,14 +20,19 @@ De scanner voert malwaredetectie pas uit nadat de directory- en bestandsclassifi
 
 ## Asynchrone scanarchitectuur
 
-Vanaf Commit 0003a worden volledige websites niet meer binnen één HTTP-request verwerkt.
+Vanaf Commit 0003a worden websites niet langer binnen één HTTP-request verwerkt.
 
-Iedere scan bestaat uit:
+De scan bestaat uit:
 
 1. Initialiseren
-2. Bestanden verzamelen
+2. Manifest opbouwen
 3. Batchverwerking
 4. Voortgangsregistratie
 5. Rapportage
 
-Hierdoor blijft de scanner geschikt voor zeer grote websites en worden PHP time-outs voorkomen.
+Hierdoor blijft de scanner schaalbaar voor zeer grote websites en wordt de standaard PHP time-out vermeden.
+
+De communicatie tussen gebruikersinterface en scan-engine verloopt volledig via een JSON API.
+
+
+

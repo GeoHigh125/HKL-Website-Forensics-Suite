@@ -25,3 +25,20 @@ Redenen:
 - maakt een voortgangsbalk mogelijk;
 - schaalbaar naar honderdduizenden bestanden;
 - geschikt voor alle ondersteunde platformen.
+
+# Ontwerpbeslissing 0003
+
+## Asynchrone verwerking
+
+Alle grote scans worden uitgevoerd via batchverwerking.
+
+Voordelen:
+
+- geen time-outs;
+- schaalbaar;
+- realtime voortgang;
+- herstartbare scans;
+- voorbereiding voor parallelle analyses.
+
+De scan-engine is volledig losgekoppeld van de gebruikersinterface via een API-laag.
+

@@ -58,3 +58,31 @@ De inventarisatie wordt vanaf Commit 0003a vervangen door een asynchrone batch-e
 - Fundament voor bestandsanalyse gereed.
 - Batcharchitectuur voorbereid.
 - SHA-256 gekozen als standaard integriteitshash.
+
+## Commit 0003a – Asynchronous Scan Engine
+
+### Nieuw
+
+- BatchFileInventory geïntroduceerd.
+- Asynchrone scanarchitectuur geïmplementeerd.
+- ScanController toegevoegd.
+- BatchController toegevoegd.
+- ProgressController toegevoegd.
+- ApiRouter toegevoegd.
+- JSON API (`public/api.php`) toegevoegd.
+- JavaScript Scan Engine ontwikkeld.
+- Dashboard uitgebreid met live voortgang.
+
+### Verbeteringen
+
+- Time-out van grote scans opgelost door batchverwerking.
+- SHA-256 als standaard integriteitshash voor inventarisaties.
+- Scanresultaten worden tussentijds opgeslagen.
+- Voortgang wordt realtime bijgewerkt.
+
+### Resultaat
+
+- Grote websites kunnen zonder PHP time-out worden verwerkt.
+- Eerste succesvolle scan uitgevoerd op een MediaWiki-installatie.
+- Getest op ruim **46.000 bestanden**.
+

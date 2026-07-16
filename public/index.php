@@ -233,6 +233,32 @@ if (
             border: 1px solid var(--hkl-gray-300);
         }
 
+            #scan-dashboard {
+
+                margin-top: 24px;
+
+            }
+
+            #scan-dashboard.scan-completed {
+
+                border-left: 6px solid #2e7d32;
+
+            }
+
+           #scan-dashboard.scan-error {
+
+               border-left: 6px solid #b42318;
+
+            }
+
+            #scan-progress-bar {
+
+                 width: 0%;
+
+                transition: width 0.25s linear;
+
+            }   
+
         .summary-card strong {
             display: block;
             margin-bottom: 6px;
@@ -340,6 +366,39 @@ if (
         .muted {
             color: var(--hkl-gray-600);
         }
+
+        .progress-track {
+            position: relative;
+            width: 100%;
+            height: 28px;
+            overflow: hidden;
+            background: #d9dee6;
+            border-radius: 7px;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: #2e7d32;
+            transition: width 0.25s linear;
+        }
+
+        #scan-progress-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #172033;
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .scan-completed #scan-progress-label {
+            color: #ffffff;
+}
+
+
     </style>
 </head>
 
@@ -363,6 +422,7 @@ if (
         </p>
 
         <form
+            id="scan-form"
             method="post"
             class="scan-form"
         >
@@ -381,7 +441,63 @@ if (
             <button type="submit">
                 Start scan
             </button>
-        </form>
+
+            </form>
+
+        <div id="scan-dashboard" class="card">
+
+            <h2>Voortgang</h2>
+
+            <p>
+                Status:
+                <strong id="scan-status">Gereed</strong>
+            </p>
+
+            <p>
+                Fase:
+                <strong id="scan-phase">-</strong>
+            </p>
+
+            <p>
+                Bestanden:
+                <strong id="scan-files">0 / 0</strong>
+            </p>
+
+            <p>
+                Huidig bestand:
+                <strong id="scan-current">-</strong>
+            </p>
+
+            <p>
+                Voortgang:
+                <strong id="scan-percent">0 %</strong>
+            </p>
+
+            <p>
+                Verstreken tijd:
+                <strong id="scan-elapsed">00:00</strong>
+            </p>
+
+            <p>
+                Resterende tijd:
+                <strong id="scan-remaining">-</strong>
+            </p>
+
+            <div class="progress-track">
+
+                <div
+                    id="scan-progress-bar"
+                    class="progress-bar"
+                ></div>
+
+                <div id="scan-progress-label">
+                    0 %
+                </div>
+
+            </div>
+
+        </div>
+
     </section>
 
     <?php if ($scanError !== null): ?>
@@ -584,5 +700,79 @@ if (
         </section>
     <?php endif; ?>
 </main>
+
+    <script src="/assets/js/scan-engine.js"></script>
+
+    <script src="/assets/js/scan-dashboard.js"></script>
+
+    <script>
+
+    const dashboard =
+        new HKLScanDashboard(
+            'scan-dashboard'
+        );
+
+    const scanner =
+        new HKLScanEngine({
+
+            apiUrl: '/api.php',
+
+            batchSize: 100,
+
+            onStarted(data) {
+
+                dashboard.update(
+                    data.progress
+                );
+
+            },
+
+            onProgress(progress) {
+
+                dashboard.update(
+                    progress
+                );
+
+            },
+
+            onCompleted(progress) {
+
+                dashboard.completed(
+                    progress
+                );
+
+            },
+
+            onError(error) {
+
+                dashboard.error(
+                    error.message
+                );
+
+            }
+
+        });
+
+    document
+        .getElementById('scan-form')
+        .addEventListener(
+            'submit',
+            function(event){
+
+                event.preventDefault();
+
+                scanner.start(
+
+                    document.getElementById(
+                        'scan_path'
+                    ).value
+
+                );
+
+            }
+        );
+
+    </script>
+
 </body>
 </html>
